@@ -23,11 +23,7 @@ class ShoppingCart
   end
 
   def is_full?
-    if total_number_of_products > @capacity.to_i
-      true
-    else
-      false
-    end
+    total_number_of_products > @capacity.to_i
   end
 
   def products_by_category(category)
@@ -48,9 +44,9 @@ class ShoppingCart
   end
 
   def product_breakdown
-    result = {}
+    result = Hash.new { |hash, key| result[key] = [] }
     @products.each do |product|
-      result[product.category] =  products_by_category(category)
+      result[product.category] << product
     end
     result
   end
